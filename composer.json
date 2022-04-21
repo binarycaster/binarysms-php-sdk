@@ -1,0 +1,28 @@
+{
+  "name": "binarycaster/binarysms",
+  "description": "BinarySMS is a package for integrate sms gateway of Binary SMS",
+  "license": "MIT",
+  "keywords": [
+    "BinaryCaster",
+    "BinarySMS"
+  ],
+  "authors": [
+    {
+      "name": "Akbar Hossain",
+      "email": "akbarhossain15@gmail.com",
+      "homepage": "https://akbarhossainr.github.io",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/config": "5.2.*",
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Binarycaster\\Binarysms\\": "src"
+    }
+  },
+  "minimum-stability": "stable"
+}
