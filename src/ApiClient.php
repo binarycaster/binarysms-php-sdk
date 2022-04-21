@@ -8,11 +8,12 @@ abstract class ApiClient
 {
     private $client;
     protected $baseUri;
-    protected $endpoint = '';
     protected $params = [];
     protected $data;
     protected $paginator;
-    protected $headers = [];
+    protected $headers = [
+        'Content-Type' => 'application/json'
+    ];
 
     public function __construct()
     {
@@ -20,14 +21,13 @@ abstract class ApiClient
         $this->client = $this->buildClient();
     }
 
+    abstract protected function send();
+
     private function buildClient()
     {
         return new Client([
             'base_uri' => $this->baseUri,
             'http_errors' => false,
-            'headers' => [
-                'Content-Type' => 'application/json',
-            ],
         ]);
     }
 
@@ -87,45 +87,12 @@ abstract class ApiClient
         return $this->exec($url, $params);
     }
 
-    public function put($url, $contents = null, $multipart = false)
-    {
-        $contents = $contents + ['_method' => 'PUT'];
-
-        $params = $contents === null ? ['body' => ''] : ['json' => $contents];
-
-        $params['headers'] = $this->getHeaders();
-
-        return $this->exec($url, $params);
-    }
-
-    public function patch($url, $contents = null, $multipart = false)
-    {
-        $contents = $contents + ['_method' => 'PATCH'];
-
-        $params = $contents === null ? ['body' => ''] : ['json' => $contents];
-
-        $params['headers'] = $this->getHeaders();
-
-        return $this->exec($url, $params);
-    }
-
-    public function delete($url, $contents = [])
-    {
-        $contents = $contents + ['_method' => 'DELETE'];
-
-        $params = $contents === [] ? ['body' => ''] : ['json' => $contents];
-
-        $params['headers'] = $this->getHeaders();
-
-        return $this->exec($url, $params);
-    }
-
     private function getHeaders()
     {
         return $this->headers;
     }
 
-    public function setHeaders(array $params = [])
+    public function setHeaders(array $params)
     {
         $this->headers = array_merge($this->headers, $params);
 

@@ -2,6 +2,7 @@
 
 namespace Binarycaster\Binarysms;
 
+use Binarycaster\Binarysms\Http\Response;
 
 class Binarysms extends ApiClient
 {
@@ -11,6 +12,7 @@ class Binarysms extends ApiClient
     protected $text;
     protected $senderId;
     protected $callbackUrl;
+    protected $schedules = [];
 
     public function __construct(Config $config)
     {
@@ -38,6 +40,24 @@ class Binarysms extends ApiClient
         return $this;
     }
 
+    public function setCallbackUrl($url)
+    {
+        $this->callbackUrl = $url;
+
+        return $this;
+    }
+
+    public function scheduledAt($dateTime)
+    {
+        if (is_array($dateTime)) {
+            $this->schedules = array_merge($this->schedules, $dateTime);
+        } else {
+            $this->schedules[] = $dateTime;
+        }
+
+        return $this;
+    }
+
     public function to($msisdn)
     {
         if (is_array($msisdn)) {
@@ -60,12 +80,22 @@ class Binarysms extends ApiClient
 
     public function send()
     {
-        return $this->post($this->endpoint . 'v1/sms/send', [
+        $response =  $this->post('v1/sms/send', [
             'to' => $this->msisdns,
             'text' => $this->text,
             'sender_id' => $this->senderId,
             'callback_url' => $this->callbackUrl,
+            'schedules' => $this->schedules,
         ]);
+
+        return new Response($response);
+    }
+
+    public function getStatus(string $taskId)
+    {
+        $response = $this->get('v1/sms/status', ['task_id' => $taskId]);
+
+        return new Response($response);
     }
 
     private function addMsisdnPrefix($msisdn): string
