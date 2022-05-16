@@ -58,11 +58,9 @@ class Response
         $type = $this->getMimeType();
 
         if ($type == 'application/json' || $type == 'text/json') {
-            $contents = $this->getBody()->getContents();
+            $contents = json_decode($this->getBody()->getContents(), $array);
 
-            if (json_last_error($contents = json_decode($contents, $array)) == JSON_ERROR_NONE) {
-                return $contents;
-            }
+            return json_last_error() === JSON_ERROR_NONE ? $contents : false;
         }
 
         return false;
