@@ -3,7 +3,6 @@
 namespace Binarycaster\Binarysms\ServiceProviders;
 
 use Binarycaster\Binarysms\Binarysms;
-use Binarycaster\Binarysms\Config;
 use Illuminate\Support\ServiceProvider;
 use Binarycaster\Binarysms\Facades\BinarysmsFacadeAccessor;
 
@@ -70,7 +69,7 @@ class BinarysmsServiceProvider extends ServiceProvider
     private function implementationBindings()
     {
         $this->app->bind('Binarysms', function ($app) {
-            return new Binarysms($app->make(Config::class));
+            return new Binarysms($app['config']->get('binarysms'));
         });
     }
 

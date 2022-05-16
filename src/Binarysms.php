@@ -14,15 +14,15 @@ class Binarysms extends ApiClient
     protected $callbackUrl;
     protected $schedules = [];
 
-    public function __construct(Config $config)
+    public function __construct(array $config)
     {
         parent::__construct();
 
         $this->config = $config;
-        $this->senderId = $this->config->get('default-sender-id');
+        $this->senderId = $this->config['default-sender-id'];
         $this->setHeaders([
-            'App-Key' => $this->config->get('app-key'),
-            'App-Secret' => $this->config->get('app-secret'),
+            'App-Key' => $this->config['app-key'],
+            'App-Secret' => $this->config['app-secret'],
         ]);
     }
 
