@@ -4,7 +4,7 @@ namespace Binarycaster\Binarysms;
 
 use Binarycaster\Binarysms\Http\Response;
 
-class Binarysms extends ApiClient
+class BinarysmsManager extends ApiClient
 {
     public $config;
     protected $msisdnPrefix = '880';

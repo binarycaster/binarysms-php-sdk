@@ -4,7 +4,7 @@ namespace Binarycaster\Binarysms\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class BinarysmsFacadeAccessor extends Facade
+class BinarysmsManager extends Facade
 {
 
     /**
@@ -14,6 +14,6 @@ class BinarysmsFacadeAccessor extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'binarysms';
+        return 'BinarysmsManager';
     }
 }
