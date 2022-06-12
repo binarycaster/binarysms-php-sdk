@@ -23,5 +23,15 @@
       "Binarycaster\\Binarysms\\": "src"
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Binarycaster\\Binarysms\\ServiceProviders\\BinarysmsServiceProvider"
+      ],
+      "aliases": {
+        "Binarysms": "Binarycaster\\Binarysms\\Facades\\BinarysmsManager"
+      }
+    }
+  }
 }
