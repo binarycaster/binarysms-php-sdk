@@ -45,7 +45,7 @@ $binarySms->to(['01925197090'])
 ```
 **In Laravel**
 ```php
-Binarysms::to('01925197090')->text('Hello World!')->send();
+Binarysms::to('01xxxxxxxxx')->text('Hello World!')->send();
 ```
 **In Lumen**
 ```php
