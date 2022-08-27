@@ -39,7 +39,7 @@ Required configs are:
 ```php
 $binarySms = new Binarysms([]);
 
-$binarySms->to(['01925197090'])
+$binarySms->to(['01xxxxxxxxx'])
     ->text('Hello World')
     ->send();
 ```
@@ -51,6 +51,6 @@ Binarysms::to('01xxxxxxxxx')->text('Hello World!')->send();
 ```php
 use Binarycaster\Binarysms\Facades\BinarysmsManager;
 
-BinarysmsManager::to('01925197090')->text('Hello World!')->send();
+BinarysmsManager::to('01xxxxxxxxx')->text('Hello World!')->send();
 ```
 
